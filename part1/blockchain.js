@@ -19,8 +19,8 @@ class Blockchain {
     return this.blocks[this.blocks.length - 1]
   }
 
-  createBlockHash(input) {
-    return SHA256(input).toString()
+  createBlockHash({ prevHash, index, data, timestamp }) {
+    return SHA256(`${prevHash};${index};${data};${timestamp}`).toString()
   }
 
   addBlock(data) {
@@ -43,7 +43,7 @@ class Blockchain {
       blockchain.push({
         index,
         prevHash,
-        hash: this.createBlockHash({prevHash, index, data, timestamp}),
+        hash: this.createBlockHash({ prevHash, index, data, timestamp }),
         data,
         timestamp
       })
@@ -55,15 +55,17 @@ class Blockchain {
   }
 
   isBlockValid(newBlock) {
+    const { prevHash, index, data, timestamp } = newBlock
+
     if (!this.blocks.length) {
-      return true
+      return false
     }
 
     if (this.previousBlock().index + 1 !== newBlock.index) {
       return false
     } else if (this.previousBlock().hash !== newBlock.prevHash) {
       return false
-    } else if (SHA256(newBlock.data).toString() !== newBlock.hash && this.blocks.length > 2) {
+    } else if (createBLockHash({ prevHash, index, data, timestamp }) !== newBlock.hash && this.blocks.length > 2) {
       return false
     }
 
@@ -86,22 +88,29 @@ class Blockchain {
     }
 
     this.blocks.forEach((block, index) => {
-      if (block.hash !== SHA256(this.previousBlock())) {
-        isValid = false
-      }
-
       if (index !== block.index) {
         isValid = false
       }
 
-      if (index > 1) {
+      if (typeof block.data !== 'string') {
+        isValid = false
+      }
+
+      if (index > 0) {
+        const blockHash = this.createBlockHash({
+          prevHash: block.prevHash,
+          index: index,
+          data: block.data,
+          timestamp: block.timestamp
+        })
+
         if (block.prevHash !== this.blocks[index - 1].hash) {
           isValid = false
         }
-      }
 
-      if (typeof block.data !== 'string') {
-        isValid = false
+        if (block.hash !== blockHash) {
+          isValid = false
+        }
       }
     })
 

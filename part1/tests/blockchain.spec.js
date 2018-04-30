@@ -68,11 +68,8 @@ describe("Blockchain",() => {
 				timestamp: 1523292008985,
 			};
 
-			// Something up with SHA256 in this test case
-			// Tried SHA256(block).toString() directly and the hash is accurate to what my blockchain is outputting
-			// So I changed the expected result
 			expect(Blockchain.createBlockHash(block))
-				.toEqual("4ea5c508a6566e76240543f8feb06fd457777be39549c4016436afda65d2330e");
+				.toEqual("362bd2ac975cfa4b34b6f726e9519872ffa250c33e7d0599ac61905134234c13");
 		});
 	});
 
@@ -87,10 +84,10 @@ describe("Blockchain",() => {
 			expect(Blockchain.isValid).toBeInstanceOf(Function);
 		});
 
-		// it("positively validates correct chain",() => {
-		// 	Blockchain.blocks = validChain;
-		// 	expect(Blockchain.isValid()).toEqual(true);
-		// });
+		it("positively validates correct chain",() => {
+			Blockchain.blocks = validChain;
+			expect(Blockchain.isValid()).toEqual(true);
+		});
 
 		it("positively validates chain consisting of only the genesis block",() => {
 			Blockchain.blocks = [validChain[0]];
