@@ -38,6 +38,9 @@ function start() {
 		// define add, print, and save commands
 		replServer.defineCommand("add",{ action: action("add"),	});
 		// TODO: "print", "save"
+		replServer.defineCommand("print", { action: action("print") })
+		replServer.defineCommand("save", { action: action("save") })
+
 
 		messages = new EventEmitter({ wildcard: true, delimiter: ":", newListener: false, maxListeners: 1E6, verboseMemoryLeak: true, });
 	}
