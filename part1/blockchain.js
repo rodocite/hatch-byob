@@ -52,6 +52,10 @@ class Blockchain {
 
     return true
   }
+
+  print() {
+    console.log(JSON.stringify(this.blocks))
+  }
 }
 
 module.exports = Blockchain
