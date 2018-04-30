@@ -108,10 +108,10 @@ describe("Blockchain",() => {
 		// 	expect(Blockchain.isValid()).toEqual(true);
 		// });
 
-		// it("positively validates chain consisting of only the genesis block",() => {
-		// 	Blockchain.blocks = [validChain[0]];
-		// 	expect(Blockchain.isValid()).toEqual(true);
-		// });
+		it("positively validates chain consisting of only the genesis block",() => {
+			Blockchain.blocks = [validChain[0]];
+			expect(Blockchain.isValid()).toEqual(true);
+		});
 
 		it("validates that first block is the genesis block of hash \"000000\"",() => {
 			Blockchain.blocks = [{hash: "100000", index: 0}];
