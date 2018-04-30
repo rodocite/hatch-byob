@@ -25,29 +25,18 @@ class Blockchain {
 
   addBlock(data) {
     const blockchain = this.blocks
+    const previousBlock = this.previousBlock()
+    const prevHash =  previousBlock.hash
+    const index = previousBlock.index + 1
+    const timestamp = Date.now()
 
-    if (!blockchain.length) {
-      blockchain.push({
-        index: 0,
-        prevHash: undefined,
-        hash: '000000',
-        data: data,
-        timestamp: Date.now()
-      })
-    } else {
-      const previousBlock = this.previousBlock()
-      const prevHash =  previousBlock.hash
-      const index = previousBlock.index + 1
-      const timestamp = Date.now()
-
-      blockchain.push({
-        index,
-        prevHash,
-        hash: this.createBlockHash({ prevHash, index, data, timestamp }),
-        data,
-        timestamp
-      })
-    }
+    blockchain.push({
+      index,
+      prevHash,
+      hash: this.createBlockHash({ prevHash, index, data, timestamp }),
+      data,
+      timestamp
+    })
 
     if (this.isBlockValid(blockchain[blockchain.length - 1])) {
       this.blocks = this.blocks.concat(blockchain)
@@ -56,6 +45,7 @@ class Blockchain {
 
   isBlockValid(newBlock) {
     const { prevHash, index, data, timestamp } = newBlock
+    const blockHash = this.createBlockHash({ prevHash, index, data, timestamp })
 
     if (!this.blocks.length) {
       return false
@@ -65,7 +55,7 @@ class Blockchain {
       return false
     } else if (this.previousBlock().hash !== newBlock.prevHash) {
       return false
-    } else if (createBLockHash({ prevHash, index, data, timestamp }) !== newBlock.hash && this.blocks.length > 2) {
+    } else if (blockHash !== newBlock.hash && this.blocks.length > 2) {
       return false
     }
 
@@ -103,10 +93,6 @@ class Blockchain {
           data: block.data,
           timestamp: block.timestamp
         })
-
-        if (block.prevHash !== this.blocks[index - 1].hash) {
-          isValid = false
-        }
 
         if (block.hash !== blockHash) {
           isValid = false
