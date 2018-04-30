@@ -12,14 +12,7 @@ class Blockchain {
   }
 
   createBlockHash(input) {
-    const x = {
-      prevHash: "000000",
-      index: 1,
-      data: "The power of a gun can kill",
-      timestamp: 1523292008985,
-    }
-
-    return SHA256(x).toString()
+    return SHA256(input).toString()
   }
 
   addBlock(data) {
