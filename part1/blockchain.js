@@ -84,6 +84,10 @@ class Blockchain {
           isValid = false
         }
       }
+
+      if (typeof block.data !== 'string') {
+        isValid = false
+      }
     })
 
     return isValid
