@@ -4,15 +4,26 @@ var SHA256 = require("crypto-js/sha256");
 
 class Blockchain {
   constructor(loadedBlockchain = []) {
-    this.blocks = [...loadedBlockchain]
+    this.blocks = loadedBlockchain
   }
 
   previousBlock() {
     return this.blocks[this.blocks.length - 1]
   }
 
+  createBlockHash(input) {
+    const x = {
+      prevHash: "000000",
+      index: 1,
+      data: "The power of a gun can kill",
+      timestamp: 1523292008985,
+    }
+
+    return SHA256(x).toString()
+  }
+
   addBlock(data) {
-    const blockchain = [...this.blocks]
+    const blockchain = this.blocks
 
     if (!blockchain.length) {
       blockchain.push({
@@ -23,21 +34,26 @@ class Blockchain {
         timestamp: Date.now()
       })
     } else {
+      const previousBlock = this.previousBlock()
+      const prevHash =  previousBlock.hash
+      const index = previousBlock.index + 1
+      const timestamp = Date.now()
+
       blockchain.push({
-        index: this.previousBlock().index + 1,
-        prevHash: this.previousBlock().hash,
-        hash: SHA256(data).toString(),
-        data: data,
-        timestamp: Date.now()
+        index,
+        prevHash,
+        hash: this.createBlockHash({prevHash, index, data, timestamp}),
+        data,
+        timestamp
       })
     }
 
-    if (this.isValid(blockchain[blockchain.length - 1])) {
+    if (this.isBlockValid(blockchain[blockchain.length - 1])) {
       this.blocks = this.blocks.concat(blockchain)
     }
   }
 
-  isValid(newBlock) {
+  isBlockValid(newBlock) {
     if (!this.blocks.length) {
       return true
     }
