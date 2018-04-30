@@ -62,6 +62,33 @@ class Blockchain {
     return true
   }
 
+  isValid() {
+    let isValid = true
+
+    if (this.blocks[0].hash !== '000000') {
+      // For this blockchain, genesis hashes are 00000
+      return false
+    }
+
+    if (this.blocks[0].index > 0) {
+      return false
+    }
+
+    this.blocks.forEach((block, index) => {
+      if (index !== block.index) {
+        isValid = false
+      }
+
+      if (index !== 0) {
+        if (block.prevHash !== this.blocks[index - 1].hash) {
+          isValid = false
+        }
+      }
+    })
+
+    return isValid
+  }
+
   print() {
     console.log(JSON.stringify(this.blocks))
   }

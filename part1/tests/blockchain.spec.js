@@ -132,24 +132,24 @@ describe("Blockchain",() => {
 			expect(Blockchain.isValid()).toEqual(false);
 		});
 
-	// 	it("validates that block prevHash maches previous block hash",() => {
-	// 		const maliciousBlock = {...validChain[2], data: 0};
-	// 		Blockchain.blocks = [
-	// 			...validChain.slice(0,2),
-	// 			{...maliciousBlock, hash: Blockchain.createBlockHash(maliciousBlock)},
-	// 			...validChain.slice(3),
-	// 		];
-	// 		expect(Blockchain.isValid()).toEqual(false);
-	// 	});
+		it("validates that block prevHash matches previous block hash",() => {
+			const maliciousBlock = {...validChain[2], data: 0};
+			Blockchain.blocks = [
+				...validChain.slice(0,2),
+				{...maliciousBlock, hash: Blockchain.createBlockHash(maliciousBlock)},
+				...validChain.slice(3),
+			];
+			expect(Blockchain.isValid()).toEqual(false);
+		});
 
-	// 	it("validates that block data is a string",() => {
-	// 		Blockchain.blocks = [
-	// 			...validChain.slice(0,2),
-	// 			{...validChain[2], data: 0},
-	// 			...validChain.slice(3),
-	// 		];
-	// 		expect(Blockchain.isValid()).toEqual(false);
-	// 	});
+		it("validates that block data is a string",() => {
+			Blockchain.blocks = [
+				...validChain.slice(0,2),
+				{...validChain[2], data: 0},
+				...validChain.slice(3),
+			];
+			expect(Blockchain.isValid()).toEqual(false);
+		});
 
 	// 	it("validates that block hash is correct",() => {
 	// 		Blockchain.blocks = [
