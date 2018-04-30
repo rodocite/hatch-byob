@@ -32,8 +32,6 @@ class Blockchain {
       })
     }
 
-    console.log(blockchain)
-
     if (this.isValid(blockchain[blockchain.length - 1])) {
       this.blocks = this.blocks.concat(blockchain)
     }
@@ -45,13 +43,10 @@ class Blockchain {
     }
 
     if (this.previousBlock().index + 1 !== newBlock.index) {
-      console.log('index')
       return false
     } else if (this.previousBlock().hash !== newBlock.prevHash) {
-      console.log('previousHash')
       return false
     } else if (SHA256(newBlock.data).toString() !== newBlock.hash && this.blocks.length > 2) {
-      console.log('sha')
       return false
     }
 
