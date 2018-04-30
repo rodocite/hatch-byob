@@ -7,22 +7,6 @@ describe("Blockchain",() => {
 	let blocksCopy;
 	let Blockchain = new Blockchain_()
 
-	beforeEach(() => {
-		Blockchain.blocks = [
-			{
-				data: "genesis!",
-				hash: "000000",
-				index: 0,
-				prevHash: undefined,
-				timestamp: 1523291999654,
-			}
-		]
-	});
-
-	afterEach(() => {
-		Blockchain.blocks = []
-	});
-
 	describe("blocks",() => {
 		it("exports blocks array",() => {
 			expect(Blockchain.blocks).toBeInstanceOf(Array);

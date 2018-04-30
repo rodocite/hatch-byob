@@ -2,8 +2,16 @@
 
 var SHA256 = require("crypto-js/sha256");
 
+const genesisBlock = {
+  data: "genesis!",
+  hash: "000000",
+  index: 0,
+  prevHash: undefined,
+  timestamp: 1523291999654
+}
+
 class Blockchain {
-  constructor(loadedBlockchain = []) {
+  constructor(loadedBlockchain = [ genesisBlock ]) {
     this.blocks = loadedBlockchain
   }
 
