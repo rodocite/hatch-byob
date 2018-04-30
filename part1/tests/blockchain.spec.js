@@ -108,20 +108,20 @@ describe("Blockchain",() => {
 		// 	expect(Blockchain.isValid()).toEqual(true);
 		// });
 
-	// 	it("positively validates chain consisting of only the genesis block",() => {
-	// 		Blockchain.blocks = [validChain[0]];
-	// 		expect(Blockchain.isValid()).toEqual(true);
-	// 	});
+		// it("positively validates chain consisting of only the genesis block",() => {
+		// 	Blockchain.blocks = [validChain[0]];
+		// 	expect(Blockchain.isValid()).toEqual(true);
+		// });
 
-	// 	it("validates that first block is the genesis block of hash \"000000\"",() => {
-	// 		Blockchain.blocks = [{hash: "100000", index: 0}];
-	// 		expect(Blockchain.isValid()).toEqual(false);
-	// 	});
+		it("validates that first block is the genesis block of hash \"000000\"",() => {
+			Blockchain.blocks = [{hash: "100000", index: 0}];
+			expect(Blockchain.isValid()).toEqual(false);
+		});
 
-	// 	it("validates that first block is the genesis block of index 0",() => {
-	// 		Blockchain.blocks = [{hash: "000000", index: 1}];
-	// 		expect(Blockchain.isValid()).toEqual(false);
-	// 	});
+		it("validates that first block is the genesis block of index 0",() => {
+			Blockchain.blocks = [{hash: "000000", index: 1}];
+			expect(Blockchain.isValid()).toEqual(false);
+		});
 
 		it("validates that block index matches index of the array",() => {
 			Blockchain.blocks = [
