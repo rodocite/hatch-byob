@@ -123,14 +123,14 @@ describe("Blockchain",() => {
 	// 		expect(Blockchain.isValid()).toEqual(false);
 	// 	});
 
-	// 	it("validates that block index maches index of the array",() => {
-	// 		Blockchain.blocks = [
-	// 			...validChain.slice(0,2),
-	// 			{...validChain[2], index: 3},
-	// 			...validChain.slice(3),
-	// 		];
-	// 		expect(Blockchain.isValid()).toEqual(false);
-	// 	});
+		it("validates that block index matches index of the array",() => {
+			Blockchain.blocks = [
+				...validChain.slice(0,2),
+				{...validChain[2], index: 3},
+				...validChain.slice(3),
+			];
+			expect(Blockchain.isValid()).toEqual(false);
+		});
 
 	// 	it("validates that block prevHash maches previous block hash",() => {
 	// 		const maliciousBlock = {...validChain[2], data: 0};
