@@ -22,7 +22,7 @@ class Blockchain {
       blockchain.push({
         index: 0,
         prevHash: undefined,
-        hash: '00000',
+        hash: '000000',
         data: data,
         timestamp: Date.now()
       })
@@ -66,12 +66,15 @@ class Blockchain {
     let isValid = true
 
     if (this.blocks[0].hash !== '000000') {
-      // For this blockchain, genesis hashes are 00000
-      return false
+      isValid = false
     }
 
     if (this.blocks[0].index > 0) {
-      return false
+      isValid = false
+    }
+
+    if (this.blocks.length === 1) {
+      return isValid
     }
 
     this.blocks.forEach((block, index) => {
@@ -83,7 +86,7 @@ class Blockchain {
         isValid = false
       }
 
-      if (index !== 0) {
+      if (index > 1) {
         if (block.prevHash !== this.blocks[index - 1].hash) {
           isValid = false
         }
