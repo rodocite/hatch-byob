@@ -75,6 +75,10 @@ class Blockchain {
     }
 
     this.blocks.forEach((block, index) => {
+      if (block.hash !== SHA256(this.previousBlock())) {
+        isValid = false
+      }
+
       if (index !== block.index) {
         isValid = false
       }

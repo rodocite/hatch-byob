@@ -151,12 +151,12 @@ describe("Blockchain",() => {
 			expect(Blockchain.isValid()).toEqual(false);
 		});
 
-	// 	it("validates that block hash is correct",() => {
-	// 		Blockchain.blocks = [
-	// 			...validChain.slice(0, validChain.length - 1),
-	// 			{...validChain[validChain.length - 1], hash: "100000"},
-	// 		];
-	// 		expect(Blockchain.isValid()).toEqual(false);
-	// 	});
+		it("validates that block hash is correct",() => {
+			Blockchain.blocks = [
+				...validChain.slice(0, validChain.length - 1),
+				{...validChain[validChain.length - 1], hash: "100000"},
+			];
+			expect(Blockchain.isValid()).toEqual(false);
+		});
 	});
 });
