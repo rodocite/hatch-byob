@@ -46,10 +46,6 @@ class Blockchain {
   isBlockValid(newBlock) {
     const blockHash = this.createBlockHash(newBlock)
 
-    if (!this.blocks.length) {
-      return false
-    }
-
     if (this.previousBlock().index + 1 !== newBlock.index) {
       return false
     } else if (this.previousBlock().hash !== newBlock.prevHash) {
