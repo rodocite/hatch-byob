@@ -64,11 +64,7 @@ class Blockchain {
   isValid() {
     let isValid = true
 
-    if (this.blocks[0].hash !== '000000') {
-      isValid = false
-    }
-
-    if (this.blocks[0].index > 0) {
+    if (this.blocks[0].hash !== '000000' || this.blocks[0].index !== 0) {
       isValid = false
     }
 
