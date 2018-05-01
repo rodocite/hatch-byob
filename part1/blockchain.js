@@ -20,7 +20,8 @@ class Blockchain {
   }
 
   createBlockHash({ prevHash, index, data, timestamp }) {
-    return SHA256(`${prevHash};${index};${data};${timestamp}`).toString()
+    const encapsulated = [prevHash, index, data, timestamp].join(';')
+    return SHA256(encapsulated).toString()
   }
 
   addBlock(data) {
