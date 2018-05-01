@@ -15,6 +15,20 @@ class Blockchain {
     this.blocks = chain
   }
 
+  containsTransaction(transactionHash) {
+    let foundHash = false
+
+    this.blocks.slice(1).forEach((block, index) => {
+      return block.data.forEach((transaction) => {
+        if (transaction.hash === transactionHash) {
+          foundHash = block.hash
+        }
+      })
+    })
+
+    return foundHash
+  }
+
   previousBlock() {
     return this.blocks[this.blocks.length - 1]
   }
