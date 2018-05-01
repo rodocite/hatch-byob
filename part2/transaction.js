@@ -2,9 +2,13 @@
 
 var SHA256 = require("crypto-js/sha256");
 
-// Object.assign(module.exports,{
-//    TODO
-// });
+const createTransactionHash = () => {
+
+}
+
+Object.assign(module.exports,{
+  createTransactionHash
+});
 
 // Hints:
 //
