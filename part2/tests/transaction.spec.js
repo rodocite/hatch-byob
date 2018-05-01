@@ -54,14 +54,14 @@ describe("Transaction",() => {
 			const transaction = Transaction.createTransaction("The power of a gun can kill");
 			transaction.hash = "690520c5170970ba81b35dcb99ce4c6e73ca4504813fca9c7ba8e9986e215165";
 			expect(Transaction.isValid(transaction)).toEqual(false);
-		});	
+		});
 
 		it("validates that data is a string",() => {
 			const transaction = Transaction.createTransaction("The power of a gun can kill");
 			transaction.data = 0;
 			transaction.hash = "1f5fd773cbc0b657dceb9755119266731903d06e190fabc2309486db310c182b";
 			expect(Transaction.isValid(transaction)).toEqual(false);
-		});	
+		});
 
 		it("validates that data is not empty",() => {
 			const transaction = Transaction.createTransaction("");
