@@ -54,13 +54,23 @@ class Blockchain {
 
     if (this.blockIsValid(block)) {
       this.blocks = this.blocks.concat(block)
-      return true
+      return block
     } else {
       return false
     }
   }
 
+  transactionIsValid(transaction) {
+    const createTransactionHash = ({ data, timestamp }) => {
+      const encapsulation = [data, timestamp].join(';')
+      return SHA256(encapsulation).toString()
+    }
+
+    return createTransactionHash(transaction) === transaction.hash
+  }
+
   blockIsValid(newBlock) {
+    let isValid = true
     const blockHash = this.createBlockHash(newBlock)
 
     if (this.previousBlock().index + 1 !== newBlock.index) {
@@ -71,7 +81,17 @@ class Blockchain {
       return false
     }
 
-    return true
+    if (newBlock.data) {
+      newBlock.data.forEach((transaction) => {
+        if (!this.transactionIsValid(transaction)) {
+          isValid = false
+        }
+      })
+    } else {
+      return false
+    }
+
+    return isValid
   }
 
   isValid() {

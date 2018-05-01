@@ -4,7 +4,6 @@ const Blockchain_ = require("../blockchain");
 const validChain = require("./test-1.json");
 
 describe("Blockchain",() => {
-	let blocksCopy;
 	let Blockchain = new Blockchain_()
 
 	describe("blocks",() => {
