@@ -16,6 +16,11 @@ if (args.load) {
 	let blocks = JSON.parse(contents);
 
 	BC = new Blockchain(blocks)
+
+	if (!BC.isValid()) {
+		console.error(new Error('Blockchain is not valid.'))
+		return
+	}
 } else {
 	BC = new Blockchain()
 }
