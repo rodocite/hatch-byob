@@ -24,22 +24,21 @@ class Blockchain {
   }
 
   addBlock(data) {
-    const blockchain = this.blocks
     const previousBlock = this.previousBlock()
     const prevHash =  previousBlock.hash
     const index = previousBlock.index + 1
     const timestamp = Date.now()
 
-    blockchain.push({
+    const block = {
       index,
       prevHash,
       hash: this.createBlockHash({ prevHash, index, data, timestamp }),
       data,
       timestamp
-    })
+    }
 
-    if (this.isBlockValid(blockchain[blockchain.length - 1])) {
-      this.blocks = this.blocks.concat(blockchain)
+    if (this.isBlockValid(block)) {
+      this.blocks = this.blocks.concat(block)
     }
   }
 
