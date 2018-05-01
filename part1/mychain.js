@@ -27,7 +27,7 @@ listener.on("add",function onAdd(text = ""){
 });
 
 listener.on("print",function onPrint(){
-	console.log(BC.blocks)
+	BC.print()
 });
 
 listener.on("save",function onSave(){

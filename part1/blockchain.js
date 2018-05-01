@@ -11,8 +11,8 @@ const genesisBlock = {
 }
 
 class Blockchain {
-  constructor(loadedBlockchain = [ genesisBlock ]) {
-    this.blocks = loadedBlockchain
+  constructor(chain = [ genesisBlock ]) {
+    this.blocks = chain
   }
 
   previousBlock() {
@@ -50,7 +50,7 @@ class Blockchain {
       return false
     } else if (this.previousBlock().hash !== newBlock.prevHash) {
       return false
-    } else if (blockHash !== newBlock.hash && this.blocks.length > 2) {
+    } else if (blockHash !== newBlock.hash) {
       return false
     }
 
@@ -90,7 +90,7 @@ class Blockchain {
   }
 
   print() {
-    console.log(JSON.stringify(this.blocks))
+    console.log(this.blocks)
   }
 }
 
