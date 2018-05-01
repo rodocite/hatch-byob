@@ -1,17 +1,11 @@
 require("mockdate").set(new Date(1523291999654));
 
-const Blockchain = require("../blockchain");
+const Blockchain_ = require("../blockchain");
 const validChain = require("./test-1.json");
 
 describe("Blockchain",() => {
 	let blocksCopy;
-
-	beforeEach(() => {
-		blocksCopy = [...Blockchain.blocks];
-	});
-	afterEach(() => {
-		Blockchain.blocks = blocksCopy;
-	});
+	let Blockchain = new Blockchain_()
 
 	describe("blocks",() => {
 		it("exports blocks array",() => {
@@ -73,6 +67,7 @@ describe("Blockchain",() => {
 				data: "The power of a gun can kill",
 				timestamp: 1523292008985,
 			};
+
 			expect(Blockchain.createBlockHash(block))
 				.toEqual("362bd2ac975cfa4b34b6f726e9519872ffa250c33e7d0599ac61905134234c13");
 		});
@@ -109,7 +104,7 @@ describe("Blockchain",() => {
 			expect(Blockchain.isValid()).toEqual(false);
 		});
 
-		it("validates that block index maches index of the array",() => {
+		it("validates that block index matches index of the array",() => {
 			Blockchain.blocks = [
 				...validChain.slice(0,2),
 				{...validChain[2], index: 3},
@@ -118,7 +113,7 @@ describe("Blockchain",() => {
 			expect(Blockchain.isValid()).toEqual(false);
 		});
 
-		it("validates that block prevHash maches previous block hash",() => {
+		it("validates that block prevHash matches previous block hash",() => {
 			const maliciousBlock = {...validChain[2], data: 0};
 			Blockchain.blocks = [
 				...validChain.slice(0,2),
