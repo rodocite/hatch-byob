@@ -44,8 +44,7 @@ class Blockchain {
   }
 
   isBlockValid(newBlock) {
-    const { prevHash, index, data, timestamp } = newBlock
-    const blockHash = this.createBlockHash({ prevHash, index, data, timestamp })
+    const blockHash = this.createBlockHash(newBlock)
 
     if (!this.blocks.length) {
       return false
@@ -87,12 +86,7 @@ class Blockchain {
       }
 
       if (index > 0) {
-        const blockHash = this.createBlockHash({
-          prevHash: block.prevHash,
-          index: index,
-          data: block.data,
-          timestamp: block.timestamp
-        })
+        const blockHash = this.createBlockHash(block)
 
         if (block.hash !== blockHash) {
           isValid = false
